@@ -46,20 +46,3 @@ En el método teardown_method, no es necesario hacer nada, ya que no hay
 nada que limpiar después de cada prueba.
 """
 
-
-""""
-    def test_invalid_logic(self):
-        print("Invalid login test")
-
-    def teardown_method(self):
-        print("*" * 80)
-        print(f"TEARDOWN SETUP - Cerrar el navegador")
-        print("*" * 80)
-
-    @classmethod
-    def teardown_class(cls):
-        print("*" * 80)
-        print(f"TEARDOWN SETUP - Limpiar usuarios con llamadas a DB")
-        print("*" * 80)
-
-"""
