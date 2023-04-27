@@ -24,9 +24,9 @@ class Calculadora:
     def resta(self, num_a: int, num_b: int):
         return num_a - num_b
     def multiplicacion(self, num_a: int, num_b:int):
-        return num_a ** num_b
+        return num_a * num_b
     def division(self, num_a: int, num_b: int):
-        return num_a // num_b
+        return num_a // num_b #si quiero flotantes solo un /
 
 
 def test_suma():
