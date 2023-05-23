@@ -2,6 +2,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from factory.webdriver_factory import get_driver
 
 CHROME_DRIVER_PATH = "./drivers/chromedriver.exe"
 CHROME_SERVICE = Service(CHROME_DRIVER_PATH)
@@ -11,16 +12,16 @@ class TestLandingPage:
 
     #Para que abra el navegador en cada prueba
     def setup_method(self):
-        self.driver = webdriver.Chrome(service=CHROME_SERVICE)
-        self.driver.maximize_window()
+        self.driver = get_driver()
         self.driver.get(URL)
+
+
     #pruebas
     def test_search_tablets(self):
-        time.sleep(5)
-        #Variables de valor esperado
+        #Variablee.sleep(5)s de valor esperado
         exp_title = "Samsung Galaxy Tab 10.1"
         exp_cost = "$241.99"
-        exp_wish_list_label = "1"
+        exp_wish_list_label = "Wish List (1)"
         exp_success_msg = "Success: You have added"
 
         # Click tablets
@@ -30,7 +31,6 @@ class TestLandingPage:
         tablets_menu.click()
 
         # Validate title
-        time.sleep(5)
         tablets_title = self.driver.find_element(By.XPATH, "//div[@class='caption']//a[contains(@href, 'product_id=49')]")
         assert tablets_title.is_displayed(), "Titulo tiene que ser visible"
         assert tablets_title.text == exp_title, f"Titulo tiene que ser{exp_title}"
@@ -45,7 +45,7 @@ class TestLandingPage:
 
         # Agregar wish list
         wish_list = self.driver.find_element(By.XPATH, '//div[@id="content"]//button[./i[@class="fa fa-heart"]]')
-        assert wish_list.is_displayed() , "Wish list debe ser visible"
+        assert wish_list.is_displayed(), "Wish list debe ser visible"
         assert wish_list.is_enabled(), "Wish list debe estar habilitado"
         wish_list.click()
 

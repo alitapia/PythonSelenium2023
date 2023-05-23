@@ -1,7 +1,8 @@
-import time
-from selenium import webdriver
+
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+
+from factory.webdriver_factory import get_driver
 
 CHROME_DRIVER_PATH = "./drivers/chromedriver.exe"
 CHROME_SERVICE = Service(CHROME_DRIVER_PATH)
@@ -11,13 +12,11 @@ class TestLandingPage:
 
     #Para que abra el navegador en cada prueba
     def setup_method(self):
-        self.driver = webdriver.Chrome(service=CHROME_SERVICE)
-        self.driver.maximize_window()
+        self.driver = get_driver()
         self.driver.get(URL)
     #pruebas
     def test_login(self):
-        time.sleep(5)
-        #Variables de valor esperado
+        #Variables de login
         usuario_input = "ali@test.com"
         password_input = "invalidpass"
         exp_error_login_msg = "Warning: No match for E-Mail Address and/or Password."
@@ -35,7 +34,6 @@ class TestLandingPage:
 
         login_btn = self.driver.find_element(By.XPATH, '//input[@type="submit"]')
         login_btn.click()
-        time.sleep(5)
 
 
         login_error_msg = self.driver.find_element(By.CLASS_NAME, "alert-danger")
